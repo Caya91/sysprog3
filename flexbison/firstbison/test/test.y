@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
+#include "functions.h"
 
 
 extern "C" int yylex(void);
@@ -14,26 +15,73 @@ void yyerror (char const *s) {
    fprintf (stderr, "%s\n", s);
  }
 
-
-
-
 %}
 
-// Define tokens
-%token HELLO
-%token ERROR
+%union {
+       char *string;
+}
+
+
+%start cmd_line
+%token <string> EXIT PIPE INPUT_REDIR OUTPUT_REDIR STRING NL BACKGROUND
+
 
 %%
 
-// Define the grammar rules
-input:
-    | input statement
-    ;
+cmd_line    :
+        | EXIT
 
-statement:
-    HELLO { printf("hello to you\n"); }
-    | ERROR { printf("Error: unrecognized input\n"); }
-    ;
+        {
+        print_cmds();
+        exit(0);
+        }
 
+        | pipeline back_ground
+        ;
+
+back_ground : BACKGROUND        {printf("background"); }
+        |                       {  }
+        ;
+
+simple      : command redir
+        ;
+
+command     : command STRING
+                {
+                add_argument($2);
+                printf($2);
+                }
+        | STRING
+                {
+                add_command($1);
+                printf($1);
+                }
+        ;
+
+redir       : input_redir output_redir
+        ;
+
+output_redir:    OUTPUT_REDIR STRING
+                {
+                }
+        |        /* empty */
+				{
+				}
+        ;
+
+input_redir:    INPUT_REDIR STRING
+                {
+                }
+        |       /* empty */
+                {
+				}
+        ;
+
+pipeline    : pipeline PIPE simple
+                {
+                }
+        | simple
+                {
+                }
+        ;
 %%
-

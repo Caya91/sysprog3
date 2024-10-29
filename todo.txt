@@ -17,7 +17,7 @@ programe werden in einer pipe ausgeführt
 
 todo:
  - eingabe für erstes Programm redirekten ( aus Datei oder Programm )
- - ausgabe für letztes Programm redirekten (
+ - ausgabe für letztes Programm redirekten
  - falsche Eingaben erkennen und nützliches Feedback an den User geben
  - support für die readline library
  - shell-builtins einbauen ( cd, pwd, kill <signo><pid>, alias/unalias)

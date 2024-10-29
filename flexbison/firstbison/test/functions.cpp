@@ -11,28 +11,23 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-
-struct Command {
-    std::vector<const char *> cmdline;
-    int input{};
-    int output{};
-
-    Command(std::vector<const char *>cmdline, int input, int output) : cmdline(std::move(cmdline)), input(input), output(output) {};
-    // Overload the << operator for printing
-
-    friend std::ostream& operator<<(std::ostream& os, const Command& command) {
-        os << "Command: ";
-        for (const auto &arg: command.cmdline) {
-            if (arg) {
-                os << arg << " ";
-            }
-        }
-        os << "\nInput: " << command.input << ", Output: " << command.output << "\n";
-        return os;
-    }
-};
-
 std::vector<Command> pipe_cmds;
+
+// füge Argument an letzten Command an
+void add_argument(char *arg){
+    pipe_cmds.back().cmdline.emplace_back(arg);
+}
+
+//Füge Command in Liste der Commands ein
+void add_command(char *cmd){
+    pipe_cmds.emplace_back(std::vector<const char*> {cmd},0,1);
+}
+
+void print_cmds(){
+    for (const auto& arg : pipe_cmds){
+        std::cout << arg << std::endl;
+    }
+}
 
 
 void executeCommands(const std::vector<Command>& commands) {
@@ -91,7 +86,7 @@ void executeCommands(const std::vector<Command>& commands) {
     }
 }
 
-
+/*   move to extra file
 int main() {
 
     pipe_cmds.push_back(Command({"ls","-l", nullptr}, 0,0));
@@ -117,3 +112,5 @@ int main() {
 
     return 0;
 }
+
+ */

@@ -10,7 +10,7 @@ YFLAGS = -d
 TARGET = test
 
 # Objektdateien
-OBJS = lex.yy.o test.tab.o main.o
+OBJS = lex.yy.o test.tab.o main.o functions.o
 
 all: $(TARGET) makefile
 
@@ -41,6 +41,8 @@ test.tab.o: test.tab.c
 main.o: main.cpp test.tab.h
 	$(CC) $(CFLAGS) -c main.cpp
 
+functions.o: functions.cpp
+	$(CC) $(CFLAGS) -c functions.cpp
 # Regel für clean
 clean:
 	rm -f $(TARGET) $(OBJS) lex.yy.c lex.yy.h test.tab.c test.tab.h

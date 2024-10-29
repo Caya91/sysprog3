@@ -34,7 +34,7 @@ char* input;
 %%
 
 cmd_line    :
-        | EXIT             { }
+        | EXIT             { exit(0); }
         | pipeline back_ground
         ;
 
