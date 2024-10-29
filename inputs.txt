@@ -1,0 +1,11 @@
+cd /home
+echo "My Name is"
+
+
+
+builtins
+pwd
+cd
+kill <signo> <pid>
+alias
+unalias

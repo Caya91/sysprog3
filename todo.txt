@@ -1,0 +1,25 @@
+1. shell liest input
+2. lexxer implementieren der Token erkennt
+3. parser verarbeitet token
+4. implementation der Funktionen
+5. Pipen von In- und Output zwischen Befehlen
+6. Ausführen von Befehlen im Hintergrund
+7. Fehlerhafte Eingaben erkennen und feedback geben
+8. readline library einbinden für convenience in der shell
+9. libhistory fürs speichern der inputs einbinden
+
+
+
+
+29.10:
+
+programe werden in einer pipe ausgeführt
+
+todo:
+ - eingabe für erstes Programm redirekten ( aus Datei oder Programm )
+ - ausgabe für letztes Programm redirekten (
+ - falsche Eingaben erkennen und nützliches Feedback an den User geben
+ - support für die readline library
+ - shell-builtins einbauen ( cd, pwd, kill <signo><pid>, alias/unalias)
+ - alias and unalias are replaced by their meaning during execution of commands
+

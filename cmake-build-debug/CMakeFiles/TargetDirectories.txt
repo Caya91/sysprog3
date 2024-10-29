@@ -1,0 +1,3 @@
+/home/martin/Sync/sysprog3/cmake-build-debug/CMakeFiles/sysprog3.dir
+/home/martin/Sync/sysprog3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/martin/Sync/sysprog3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
