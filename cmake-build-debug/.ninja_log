@@ -1,8 +1,0 @@
-# ninja log v6
-17	266	1729806690976973329	CMakeFiles/sysprog3.dir/lexer.c.o	1c2eae32b2a7a9c3
-1	15	1729806690972973345	lexer.c	2a4d932bc041c3bf
-0	39	1729866674919422272	build.ninja	eddb83f1d4052308
-1	15	1729806690972973345	/home/martin/Sync/sysprog3/cmake-build-debug/lexer.c	2a4d932bc041c3bf
-1	142	1729806947779932725	CMakeFiles/sysprog3.dir/main.cpp.o	733463e48f2d0752
-208	319	1729728399329430592	sysprog3	ead640ac00ad2dc1
-4	115	1729806947782932712	CMakeFiles/sysprog3.dir/lex.yy.c.o	fc05b43c7b79b90e
