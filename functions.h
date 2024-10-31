@@ -23,7 +23,7 @@ struct Command {
         os << "Command: ";
         for (const auto &arg: command.cmdline) {
             if (arg) {
-                os << arg << " ";
+                os << " " << arg << " ";
             }
         }
         os << "\nInput: " << command.input << ", Output: " << command.output << "\n";
@@ -35,6 +35,8 @@ struct Command {
 void add_argument(char *arg);
 void add_command(char *cmd);
 void print_cmds();
+bool set_output(char* file);
+bool set_input(char* file);
 
 
 #endif //SYSPROG3_FUNCTIONS_H

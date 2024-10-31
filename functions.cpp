@@ -6,10 +6,13 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <cstdio>
+#include <cstring>
 #include <sstream>
 #include <vector>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
 std::vector<Command> pipe_cmds;
 
@@ -22,6 +25,48 @@ void add_argument(char *arg){
 void add_command(char *cmd){
     pipe_cmds.emplace_back(std::vector<const char*> {cmd},0,1);
 }
+
+// setzt input für erstes Command auf Ursprung von redirect input
+bool set_input(char* file){
+    if (file == nullptr){
+        std::cerr << "error: inputfile is NULL" << std::endl;
+        return false;
+    }
+
+    int input_fd = open(file, O_RDONLY);
+    std::cout << "Input FD:" << input_fd << std::endl;
+
+    if(input_fd < 0) {
+        std::cerr << "error opening file: " << strerror(errno) << ": " << file << std::endl;
+        return false;
+    } else {
+        pipe_cmds.back().input = input_fd;
+        return true;
+    }
+
+}
+
+// setzt output für ketztes Command auf Ziel von redirect output
+bool set_output(char* file){
+    if(file == nullptr) {
+        std::cerr << "error: output file is null" << std::endl;
+        return false;
+    }
+
+    int out_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    std::cout << "Output FD:" << out_fd << std::endl;
+
+
+    if(out_fd < 0) {
+        std::cerr << "error opening file: " << strerror(errno) << ": " << file << std::endl;
+        return false;
+    } else {
+        pipe_cmds.back().output = out_fd;
+        return true;
+    }
+}
+
+
 
 void print_cmds(){
     for (const auto& arg : pipe_cmds){
@@ -85,32 +130,3 @@ void executeCommands(const std::vector<Command>& commands) {
         wait(nullptr);
     }
 }
-
-/*   move to extra file
-int main() {
-
-    pipe_cmds.push_back(Command({"ls","-l", nullptr}, 0,0));
-    pipe_cmds.push_back(Command({"grep","pattern", nullptr}, 0,0));
-    pipe_cmds.push_back(Command({"wc","-l", nullptr}, 0,0));
-
-
-    for (const auto& arg : pipe_cmds){
-        std::cout << arg << std::endl;
-    }
-
-    std::cout << "leggo" << std::endl;
-    std::vector<Command> commands = {
-            Command({"ls", "-l", nullptr}, 0, 1),
-            Command({"grep", "txt", nullptr}, 0, 1),
-            Command({"wc", "-l", nullptr}, 0, 1)
-    };
-
-    executeCommands(commands);
-    executeCommands(pipe_cmds);
-
-
-
-    return 0;
-}
-
- */

@@ -2,6 +2,7 @@
 %{
 #include "test.tab.h"
 #include <string.h>
+#include <FlexLexer.h>
 
 extern "C" int yylex (void);
 

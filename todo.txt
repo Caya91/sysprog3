@@ -9,8 +9,6 @@
 9. libhistory fürs speichern der inputs einbinden
 
 
-
-
 29.10:
 
 programe werden in einer pipe ausgeführt

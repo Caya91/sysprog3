@@ -32,7 +32,6 @@ cmd_line    :
         | EXIT
 
         {
-        print_cmds();
         exit(0);
         }
 
@@ -49,12 +48,10 @@ simple      : command redir
 command     : command STRING
                 {
                 add_argument($2);
-                printf($2);
                 }
         | STRING
                 {
                 add_command($1);
-                printf($1);
                 }
         ;
 
@@ -63,6 +60,8 @@ redir       : input_redir output_redir
 
 output_redir:    OUTPUT_REDIR STRING
                 {
+
+                if(set_output($2)) { YYABORT; }
                 }
         |        /* empty */
 				{
@@ -71,6 +70,9 @@ output_redir:    OUTPUT_REDIR STRING
 
 input_redir:    INPUT_REDIR STRING
                 {
+
+                if(set_input($2)) { YYABORT; }
+
                 }
         |       /* empty */
                 {

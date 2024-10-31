@@ -9,3 +9,17 @@ cd
 kill <signo> <pid>
 alias
 unalias
+
+
+test ob inoput output redir für 1 command geht
+echo "hello" < /home/martin/test_input.txt
+
+echo "hello" > /home/martin/test_output.txt
+
+test input/output redir für mehr commands
+
+
+cat "/home/martin/test_input.txt" | grep hell | wc -c < /home/martin/test_input.txt
+cat "/home/martin/test_input.txt" | grep hell | wc -c > /home/martin/test_output.txt
+
+cat "/home/martin/test_input.txt" < /home/martin/test_input.txt | grep hell | wc -c

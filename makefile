@@ -19,7 +19,7 @@ run: $(TARGET)
 
 # Regel zum Erstellen des Hauptprogramms
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) -lreadline
 
 # Regel für parse.tab.c und parse.tab.h
 test.tab.c test.tab.h: test.y
